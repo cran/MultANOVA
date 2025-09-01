@@ -1,0 +1,13 @@
+#' OTU data
+#'
+#' @description Metagenomics data of example 1 from Mahieu & Cariou (2025)
+#'
+#' @usage data(OTU)
+#'
+#' @references Mahieu, B., & Cariou, V. (2025). MultANOVA Followed by Post Hoc Analyses for Designed High‐Dimensional Data: A Comprehensive Framework That Outperforms ASCA, rMANOVA, and VASCA. Journal of Chemometrics, 39(7). \doi{https://doi.org/10.1002/cem.70039}
+#' @references Poirier S, Luong N-DM, Anthoine V, et al. Large-scale multivariate dataset on the characterization of microbiota diversity, microbial growth dynamics, metabolic spoilage volatilome and sensorial profiles of two industrially produced meat products subjected to changes in lactate concentration and packaging atmosphere. Data Brief. 2020;30:105453. \doi{https://doi.org/10.1016/j.dib.2020.105453}
+#' @references Luong N-DM, Membré J-M, Coroller L, et al. Application of a path-modelling approach for deciphering causality relationships between microbiota, volatile organic compounds and off-odour profiles during meat spoilage. Int J Food Microbiol. 2021;348:109208. \doi{https://doi.org/10.1016/j.ijfoodmicro.2021.109208}
+#'
+#' @examples
+#' data(OTU)
+"OTU"
