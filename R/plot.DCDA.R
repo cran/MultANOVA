@@ -204,7 +204,7 @@ plot.DCDA=function(x,axes=c(1,2),pair.comp=NULL,alpha=0.05,select.var=1:nrow(x$v
     col.lab=c(col.lab,rep("red",nrow(df.fleche)))
   }
   nudge=lab*0.01
-  p=p+geom_label_repel(as.data.frame(lab),mapping=aes(x=lab[,1],y=lab[,2],label=rownames(lab)),label.size=NA,colour=col.lab,size=size*2,segment.size=1,label.padding = 0,
+  p=p+geom_label_repel(as.data.frame(lab),mapping=aes(x=lab[,1],y=lab[,2],label=rownames(lab)),linewidth=0,colour=col.lab,size=size*2,segment.size=1,label.padding = 0,
                        nudge_x = nudge[,1],nudge_y = nudge[,2],min.segment.length = 1)
 
   return(p)
