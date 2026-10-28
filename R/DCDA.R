@@ -31,23 +31,6 @@
 #' plot(acd,axes = c(1,2),pair.comp = lsd,expansion.var = 1.5,select.var = which(fish[2,]<=0.05))
 
 DCDA=function(formula,design,responses,term){
-  permute <- function(vecteur) {
-    if (length(vecteur) == 1) {
-      toutes_les_perms=as.data.frame(vecteur) ; colnames(toutes_les_perms)=as.character(1:ncol(toutes_les_perms))
-      return(toutes_les_perms)
-    }
-    toutes_les_perms <- list()
-    for (i in seq_along(vecteur)) {
-      element_courant <- vecteur[i]
-      reste_du_vecteur <- vecteur[-i]
-      permutations_du_reste <- permute(reste_du_vecteur)
-      for (perm_reste in permutations_du_reste) {
-        toutes_les_perms <- c(toutes_les_perms, list(c(element_courant, perm_reste)))
-      }
-    }
-    toutes_les_perms=as.data.frame(toutes_les_perms) ; colnames(toutes_les_perms)=as.character(1:ncol(toutes_les_perms))
-    return(toutes_les_perms)
-  }
   if (!inherits(formula,"formula")){
     stop("class(formula) must be formula")
   }
@@ -101,10 +84,9 @@ DCDA=function(formula,design,responses,term){
   }
   compo.term=strsplit(term,"[:]")[[1]]
   level.term=levels(interaction(design[,compo.term]))
-  coupe.term=strsplit(term,"[:]")[[1]] ; coupe.term.perm=permute(coupe.term) ; term.version=apply(coupe.term.perm,2,paste,collapse=":")
   dans.term=NULL
   for (st in effect.names){
-    if (any(regexpr(st,term.version)>0)){
+    if (all(strsplit(st,":")[[1]] %in% compo.term)){
       dans.term=c(dans.term,st)
     }
   }

@@ -24,6 +24,7 @@ Mahieu, B., & Cariou, V. (2025). MultANOVA Followed by Post Hoc Analyses for Des
 
 Authors:
 \itemize{
+  \item Benjamin Mahieu \email{benjamin.mahieu@oniris-nantes.fr}
   \item Veronique Cariou \email{veronique.cariou@oniris-nantes.fr}
 }
 

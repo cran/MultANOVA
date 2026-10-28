@@ -138,12 +138,21 @@ plot.DCDA=function(x,axes=c(1,2),pair.comp=NULL,alpha=0.05,select.var=1:nrow(x$v
   max.norm.var = max(abs(adjusted.var.coord[,axes]))
   adjusted.var.coord=adjusted.var.coord*max.norm.level/max.norm.var*expansion.var
 
-  xmin=min(x$level.coord[,axes[1]],adjusted.var.coord[,axes[1]],ell[,2])
-  xmax=max(x$level.coord[,axes[1]],adjusted.var.coord[,axes[1]],ell[,2])
-  ymin=min(x$level.coord[,axes[2]],adjusted.var.coord[,axes[2]],ell[,3])
-  ymax=max(x$level.coord[,axes[2]],adjusted.var.coord[,axes[2]],ell[,3])
-  pmin=min(xmin,ymin)*1.05
-  pmax=max(xmax,ymax)*1.05
+  if (!is.null(pair.comp)){
+    xmin=min(x$level.coord[,axes[1]],adjusted.var.coord[,axes[1]],ell[,2])
+    xmax=max(x$level.coord[,axes[1]],adjusted.var.coord[,axes[1]],ell[,2])
+    ymin=min(x$level.coord[,axes[2]],adjusted.var.coord[,axes[2]],ell[,3])
+    ymax=max(x$level.coord[,axes[2]],adjusted.var.coord[,axes[2]],ell[,3])
+    pmin=min(xmin,ymin)*1.05
+    pmax=max(xmax,ymax)*1.05
+  }else{
+    xmin=min(x$level.coord[,axes[1]],adjusted.var.coord[,axes[1]])
+    xmax=max(x$level.coord[,axes[1]],adjusted.var.coord[,axes[1]])
+    ymin=min(x$level.coord[,axes[2]],adjusted.var.coord[,axes[2]])
+    ymax=max(x$level.coord[,axes[2]],adjusted.var.coord[,axes[2]])
+    pmin=min(xmin,ymin)*1.05
+    pmax=max(xmax,ymax)*1.05
+  }
 
   if (!is.null(select.var)){
     adjusted.var.coord=adjusted.var.coord[select.var,,drop=FALSE]
@@ -157,11 +166,11 @@ plot.DCDA=function(x,axes=c(1,2),pair.comp=NULL,alpha=0.05,select.var=1:nrow(x$v
   }
   p=p+theme(axis.title.x = element_text(size = 5*size, face = "bold"),axis.title.y = element_text(size = 5*size, face = "bold"),plot.title = element_text(hjust = 0.5, face = "bold",size = 7*size),axis.text = element_text(size=3*size))
   p=p+geom_hline(yintercept=0,linetype="dashed",linewidth=1)+geom_vline(xintercept=0,linetype="dashed",linewidth=1)
-  ell=ell[ell$V1%in%rownames(x$level.coord)[select.level],]
-  ell=as.data.frame(ell) ; ell[,1] = as.factor(as.character(ell[,1])) ; ell[,2] = as.numeric(ell[,2]) ; ell[,3]=as.numeric(ell[,3])
-  p=p+geom_path(data=as.data.frame(ell),aes(x=ell[,2],y=ell[,3],group=ell[,1]),colour="blue",linewidth=1)
 
   if (!is.null(pair.comp)){
+    ell=ell[ell$V1%in%rownames(x$level.coord)[select.level],]
+    ell=as.data.frame(ell) ; ell[,1] = as.factor(as.character(ell[,1])) ; ell[,2] = as.numeric(ell[,2]) ; ell[,3]=as.numeric(ell[,3])
+    p=p+geom_path(data=as.data.frame(ell),aes(x=ell[,2],y=ell[,3],group=ell[,1]),colour="blue",linewidth=1)
     df.segment=NULL
     for (i in 1:(nrow(pair.comp)-1)){
       for (j in (i+1):ncol(pair.comp)){
